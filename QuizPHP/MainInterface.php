@@ -1,5 +1,7 @@
 <?php
 session_start();
+$isAdmin = isset($_SESSION['user_type']) && $_SESSION['user_type'] === "Admin";
+$isUser = isset($_SESSION['user_type']) && $_SESSION['user_type'] === "User";
 $Loggedin = !isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true;
 ?>
 
@@ -39,6 +41,7 @@ $Loggedin = !isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true;
         <?php
         if ($Loggedin) {
             ?>
+            
             <div class="row mt-5">
                 <div class="col-12 text-end">
                     <a href="login.php" class="btn btn-primary">Login</a>
@@ -60,13 +63,25 @@ $Loggedin = !isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true;
 
             <?php
         }
-        ?>
 
-        <div class="row mt-3">
+        if ($isAdmin) {
+            echo '<div class="row mt-3">
             <div class="col-12 text-center">
                 <a href="play.php" class="btn btn-success btn-lg">Show</a>
             </div>
-        </div>
+        </div>';
+        } else if ($isUser) {
+            '<div class="row mt-3">
+            <div class="col-12 text-center">
+                <a href="play_non_admin.php" class="btn btn-success btn-lg">Show</a>
+            </div>
+        </div>';
+
+
+        }
+        ?>
+
+        
         <div class="row mt-3">
             <div class="col-12 text-center">
                 <a href="credits.php" class="btn btn-info btn-lg">Credits</a>
@@ -75,7 +90,7 @@ $Loggedin = !isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true;
 
         <?php
         // Check if the user is an admin and display an additional button if true
-        $isAdmin = isset($_SESSION['user_type']) && $_SESSION['user_type'] === "Admin";
+        
         // $isAdmin = isset($_SESSION['username']) && $_SESSION['username'] === "Bagas";
         if ($isAdmin) {
             echo '<div class="row mt-3">

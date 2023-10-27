@@ -71,7 +71,7 @@ $Loggedin = !isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true;
             </div>
         </div>';
         } else if ($isUser) {
-            '<div class="row mt-3">
+            echo '<div class="row mt-3">
             <div class="col-12 text-center">
                 <a href="play_non_admin.php" class="btn btn-success btn-lg">Show</a>
             </div>

@@ -89,14 +89,6 @@ $result = $conn->query($query);
                                             $
                                             <?php echo $price; ?>
                                         </h2>
-                                        <br>
-                                    </div>
-                                    <div class="price-container">
-                                        <h2 class="">
-                                            Price :
-                                            $
-                                            <?php echo $price; ?>
-                                        </h2>
                                     </div>
                                     <div class="col mt-3" style="padding-left:50px; padding-bottom: 25px;">
                                         <a href="buy.php?Name=<?= $row['Name'] ?>" class="btn btn-primary btn-lg">Purchase

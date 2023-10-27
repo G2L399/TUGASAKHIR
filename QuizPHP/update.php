@@ -32,7 +32,7 @@
             <h4>
                 <?php
                 echo $Name; ?><br>
-                Price : $
+                Price : $gsdgsgs
                 <?php
                 echo $Price;
                 ?>

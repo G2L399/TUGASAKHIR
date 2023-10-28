@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['PRICE'];
 
     // Initialize the new image data
-    // $newImage = null;
+    $newImage = null;
 
     // Check if a new image file was uploaded
     if (isset($_FILES['IMAGE']) && $_FILES['IMAGE']['size'] > 0) {

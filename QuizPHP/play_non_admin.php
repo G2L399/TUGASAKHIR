@@ -45,7 +45,7 @@ $result = $conn->query($query);
     <div class="container mt-5">
         <div class="row">
             <?php
-            // $counter = 0; // Inisialisasi counter
+            // $counter = 0; // Inisialisasi counter di non aktifkan liat komen dibawah ok
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $imageData = $row["Flags"];
@@ -82,6 +82,7 @@ $result = $conn->query($query);
                         </div>
                     </div>
                     <?php
+                    // pake code ini kalau misal eror colum nya cuma logic doang ini ga penting amat 
                     // $counter++; // Increment counter
                     // if ($counter % 3 == 0) { // Jika sudah 3 card ditampilkan, tutup baris
                     //     echo '</div><div class="row">';

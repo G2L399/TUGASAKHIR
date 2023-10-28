@@ -28,27 +28,6 @@ $result = $conn->query($query);
             width: 100%;
             border: 5px solid black;
         }
-
-        .Products-Available {
-            padding: 50px 50px 0px 50px;
-        }
-
-        .flag-name {
-            font-size: 25px;
-            padding: 10px 50px 0px 50px;
-        }
-
-        .price-container {
-            padding: 0px 50px 0px 50px;
-        }
-
-        h2 {
-            font-size: 20px;
-        }
-
-        .Prices {
-            padding: 0px 0px 0px 50px;
-        }
     </style>
 </head>
 
@@ -56,7 +35,7 @@ $result = $conn->query($query);
     <h1 class="Products-Available">FLAGS AVAILABLE</h1>
     <h6 class="Prices">Note : Prices Are In USD</h6>
     <div class="container mt-5">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div class="row">
             <?php
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -68,8 +47,8 @@ $result = $conn->query($query);
                     // $flagName = pathinfo($row["Name"], PATHINFO_FILENAME); // Extract file name without extension
                     ?>
 
-                    <div class="col">
-                        <div class="col card mb-4">
+                    <div class="col-md-4">
+                        <div class="card mb-4">
                             <div class="card-body">
                                 <!-- <div class="flag-container"> -->
                                     <img class="flag-image" src="data:image/jpeg;base64,<?php echo $base64Image; ?>"
@@ -93,10 +72,8 @@ $result = $conn->query($query);
                                         </h2>
                                         <br>
                                     </div>
-                                    <div class="" style="padding-left:50px;">
+                                    <div>
                                         <a href="update.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-lg">Update</a>
-                                    </div>
-                                    <div class="col mt-3" style="padding-left:50px; ">
                                         <a href="delete.php?Name=<?= $row['Name'] ?>" onclick="return confirm('Are You Sure?')"
                                             class="btn btn-danger btn-lg">Delete</a>
                                     </div>
@@ -110,7 +87,7 @@ $result = $conn->query($query);
                                             <?php echo $price; ?>
                                         </h2>
                                     </div>
-                                    <div class="col mt-3" style="padding-left:50px; padding-bottom: 25px;">
+                                    <div class="col mt-3">
                                         <a href="buy.php?Name=<?= $row['Name'] ?>" class="btn btn-primary btn-lg">Purchase
                                             <?= $row['Name'] ?>'s Flag
                                         </a>

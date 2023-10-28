@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['loggedin'] = true;
     
             // Redirect to the home page or user dashboard
-            header("Location: MainInterface.php");
+            header("Location: home.php");
             exit();
         }
     }
@@ -42,6 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Authentication failed, display an error message and redirect to login page
 $_SESSION['login_error'] = true;
-header("Location: MainInterface.html");
+header("Location: home.html");
 exit();
 ?>

@@ -31,11 +31,12 @@
 include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check if an image file was uploaded
-    if (isset($_FILES['image'])) {
-        // Get the name from the form input
+    try {
+        // Get the name, price, and image data from the form inputs
         $name = $_POST['question'];
-        $Price = $_POST['PRICE'];
+        $price = $_POST['PRICE'];
+        $imageData = file_get_contents($_FILES['image']['tmp_name']);
+
         // Check if the name already exists in the database
         $sql = "SELECT COUNT(*) FROM images WHERE Name = ?";
         $stmt = $conn->prepare($sql);
@@ -46,15 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
 
         if ($nameCount > 0) {
-            echo "<script>alert('Error: The Image already exists in the database.');location.href='Question.php';</script>'";
+            echo "<script>alert('Error: The Image already exists in the database.');location.href='Question.php';</script>";
         } else {
-            // Read the image file
-            $imageData = file_get_contents($_FILES['image']['tmp_name']);
-
             // Insert data into the "quiz" table
             $sql = "INSERT INTO images (Flags, Name, Price) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param('ssi', $imageData, $name, $Price);
+            $stmt->bind_param('ssi', $imageData, $name, $price);
 
             if ($stmt->execute()) {
                 echo "<script>alert('Image Uploaded Successfully');location.href='play.php';</script>";
@@ -64,9 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $stmt->close();
         }
-    } else {
-        echo 'Please select an image file.';
+    } catch (Exception $e) {
+        echo 'Error: ' . $e->getMessage();
     }
+} else {
+    echo 'Please select an image file.';
 }
 
 ?>

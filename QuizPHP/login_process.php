@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // $row = mysqli_fetch_array($result);
         
         $userType = $row1['usertype']; // Get the user's type
+        $id = $row1['id_user']; // Get the user's id 
         $storedPasswordHash = $row['Password'];
         // Verify the entered password against the stored hash
         if (md5($enteredPassword) === $storedPasswordHash) {
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['Username'] = $username;
             $_SESSION['user_type'] = $userType; // Store the user's type
             $_SESSION['loggedin'] = true;
-    
+            $_SESSION['id_user'] = $id;
             // Redirect to the home page or user dashboard
             header("Location: home.php");
             exit();

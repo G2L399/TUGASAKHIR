@@ -1,7 +1,7 @@
 <head>
     <title>Upload Image Form</title>
     <!-- Include Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         img {
             width: 50%;
@@ -11,6 +11,9 @@
 </head>
 
 <body>
+<?php
+    include("header.php");
+    ?>
     <?php
     include('connection.php');
     $query = mysqli_query($conn, "select * from images where id = '" . $_GET['id'] . "'");
@@ -32,7 +35,7 @@
             <h4>
                 <?php
                 echo $Name; ?><br>
-                Price : $nfjkfkj
+                Price : $
                 <?php
                 echo $Price;
                 ?>

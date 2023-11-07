@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param($bindTypes, ...$bindValues);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Image Updated Successfully');location.href='play.php';</script>";
+        echo "<script>alert('Image Updated Successfully');location.href='home.php';</script>";
     } else {
         echo 'Error: ' . $stmt->error;
     }

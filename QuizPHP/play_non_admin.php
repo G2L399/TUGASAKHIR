@@ -1,10 +1,13 @@
 <?php
 session_start();
+include ('header.php');
 // Connect to your database (you should have already included your connection code)
 include('connection.php');
 // Query to select all image data from the 'images' table
 $query = "SELECT * FROM images order by images.Name ASC";
 $result = $conn->query($query);
+
+
 ?>
 
 
@@ -16,7 +19,7 @@ $result = $conn->query($query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flags</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .flag-container {
             display: inline-block;
@@ -26,7 +29,7 @@ $result = $conn->query($query);
 
         .flag-image {
             width: 100%;
-            border: 5px solid black;
+            border: 2px solid black;
         }
 
         .flag-name {
@@ -36,16 +39,44 @@ $result = $conn->query($query);
         h2 {
             font-size: 20px;
         }
+
+        .custom-container {
+            max-width: 90%;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #ffffff;
+            background-clip: border-box;
+            border: 2px solid rgba(0, 0, 0, .125);
+            border-radius: .25rem
+        }
     </style>
 </head>
 
 <body>
-    <h1 class="Products-Available">FLAGS AVAILABLE</h1>
-    <h6 class="Prices">Note: Prices Are In USD</h6>
-    <div class="container mt-5">
-        <div class="row">
+    
+
+    <div class="container mt-3">
+        
+        <h1 class="Products-Available center">FLAGS AVAILABLE</h1>
+        <h6 class="Prices center">Note: Prices Are In USD</h6>
+
+    </div>
+
+    <div class="container mt-5 custom-container">
+        <div class="row row-cols-lg-4">
+
             <?php
-            // $counter = 0; // Inisialisasi counter di non aktifkan liat komen dibawah ok
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $imageData = $row["Flags"];
@@ -56,8 +87,9 @@ $result = $conn->query($query);
                     // $flagName = pathinfo($row["Name"], PATHINFO_FILENAME); // Extract file name without extension
                     ?>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 py-4">
                         <div class="card mb-4">
+
                             <div class="card-body">
                                 <img class="flag-image" src="data:image/jpeg;base64,<?php echo $base64Image; ?>"
                                     alt="<?php echo $Name, "'s Flag"; ?>">
@@ -74,7 +106,7 @@ $result = $conn->query($query);
                                     </h2>
                                 </div>
                                 <div class="mt-3">
-                                    <a href="buy.php?Name=<?= $row['Name'] ?>" class="btn btn-primary w-100">Purchase
+                                    <a href="buy.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-lg">Purchase
                                         <?= $row['Name'] ?>'s Flag
                                     </a>
                                 </div>
@@ -82,11 +114,6 @@ $result = $conn->query($query);
                         </div>
                     </div>
                     <?php
-                    // pake code ini kalau misal eror colum nya cuma logic doang ini ga penting amat 
-                    // $counter++; // Increment counter
-                    // if ($counter % 3 == 0) { // Jika sudah 3 card ditampilkan, tutup baris
-                    //     echo '</div><div class="row">';
-                    // }
                 }
             } else {
                 echo "No images available.";

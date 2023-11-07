@@ -13,6 +13,9 @@
 </head>
 
 <body>
+<?php
+    include("header.php");
+    ?>
     <div class="container mt-5">
         <h2>Upload Image and Answer</h2>
         <form action="addQuestion.php" method="post" enctype="multipart/form-data">
